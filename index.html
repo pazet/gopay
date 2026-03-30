@@ -223,7 +223,7 @@
         .grand-total-label {
             font-weight: 600;
             font-size: 14px;
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
         .grand-total-value {
@@ -261,18 +261,18 @@
             width: 100%;
             max-width: 480px;
             background: white;
-            padding: 14px 20px 26px 20px;
+            padding: 16px 20px 24px 20px;
             border-radius: 32px 32px 0 0;
-            box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.06);
             z-index: 101;
             border-top: 1px solid #EDF2F7;
         }
 
         .wallet-bar {
-            background: #FCFDFF;
-            border: 1px solid #E9EDF2;
-            padding: 12px 16px;
-            border-radius: 20px;
+            background: #FCFCFC;
+            border: 1px solid #F2F2F2;
+            padding: 14px 16px;
+            border-radius: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -286,30 +286,42 @@
         }
 
         .wallet-icon-img {
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             object-fit: contain;
         }
 
         .btn-pay-action {
             width: 100%;
-            background: #00A63F;
+            background: #2E8B37;
             border: none;
-            padding: 16px 20px;
-            border-radius: 60px;
+            padding: 16px 24px;
+            border-radius: 100px;
             color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 17px;
+            font-size: 19px;
             font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            cursor: default;
+            pointer-events: none;
+            opacity: 0.9;
         }
 
-        .btn-pay-action:active {
-            transform: scale(0.98);
-            background: #008A35;
+        .amount-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .arrow-box {
+            background: rgba(255,255,255,0.25);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .toast-message {
@@ -331,19 +343,27 @@
             transition: opacity 0.2s;
         }
 
+        /* Detail Denda Card - Simple Tertutup Awal */
         .detail-denda-card {
             background: #F1F5F9;
             border-radius: 16px;
-            padding: 14px;
             margin-bottom: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
         .detail-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 14px 16px;
             cursor: pointer;
-            padding: 4px 0;
+            background: #F1F5F9;
+            transition: background 0.2s;
+        }
+
+        .detail-header:hover {
+            background: #E9EEF4;
         }
 
         .detail-header h3 {
@@ -362,22 +382,25 @@
         }
 
         .detail-content {
+            background: white;
             overflow: hidden;
-            transition: max-height 0.3s ease;
-            max-height: 500px;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 0;
+            padding: 0 16px;
         }
 
-        .detail-content.collapsed {
-            max-height: 0;
+        .detail-content.open {
+            max-height: 600px;
+            padding: 0 16px 16px 16px;
         }
 
         .penalty-item-clickable {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 8px;
-            margin: 6px 0;
-            background: white;
+            padding: 12px 12px;
+            margin: 8px 0;
+            background: #FAFCFE;
             border-radius: 12px;
             cursor: pointer;
             transition: background 0.2s ease;
@@ -406,8 +429,8 @@
         .total-denda-row {
             display: flex;
             justify-content: space-between;
-            padding: 12px 8px;
-            margin-top: 8px;
+            padding: 12px 12px;
+            margin-top: 12px;
             background: #FEF2F0;
             border-radius: 12px;
             font-weight: 800;
@@ -423,6 +446,26 @@
             color: #D93C1E;
         }
 
+        .btn-lihat-detail {
+            background: #EFF3F6;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #2E8B37;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+            width: fit-content;
+        }
+
+        .btn-lihat-detail:hover {
+            background: #E4E9EF;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -430,6 +473,29 @@
 
         .card {
             animation: fadeIn 0.3s ease;
+        }
+
+        .simple-summary {
+            background: #F8FAFE;
+            border-radius: 14px;
+            padding: 10px 14px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #EDF2F8;
+        }
+
+        .simple-summary span:first-child {
+            font-weight: 600;
+            font-size: 13px;
+            color: #475569;
+        }
+
+        .simple-summary span:last-child {
+            font-weight: 800;
+            font-size: 14px;
+            color: #D93C1E;
         }
     </style>
 </head>
@@ -620,7 +686,7 @@
             </div>
         </div>
 
-        <!-- WARNING NOTE - TANPA PER HARI -->
+        <!-- WARNING NOTE -->
         <div class="warning-note">
             <i class="fa-solid fa-circle-exclamation" style="font-size: 16px;"></i>
             <div>
@@ -628,17 +694,19 @@
             </div>
         </div>
 
-        <!-- Rincian Denda per Cicilan - INTERAKTIF (BISA DIPERKECIL & KLIK DETAIL) -->
+        <!-- Rincian Denda per Cicilan - SIMPLE TERTUTUP AWAL, BISA DIKLIK UNTUK MEMBUKA -->
         <div class="detail-denda-card" id="detailDendaCard">
             <div class="detail-header" id="toggleDetailBtn">
                 <h3>
                     <i class="fa-solid fa-receipt"></i> Rincian Denda per Cicilan
                     <i class="fa-regular fa-circle-question" style="color: #5B6E8C; font-size: 12px; cursor: help;" id="infoIcon"></i>
                 </h3>
-                <i class="fa-solid fa-chevron-up toggle-icon" id="toggleIcon"></i>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 12px; color: #2E8B37;" id="toggleText">Lihat detail</span>
+                    <i class="fa-solid fa-chevron-down toggle-icon" id="toggleIcon"></i>
+                </div>
             </div>
             <div class="detail-content" id="detailContent">
-                <!-- Item denda dengan interaksi klik -->
                 <div class="penalty-item-clickable" data-name="Modal Usaha (Jan) telat 3 bulan" data-amount="229251" data-late="3 bulan">
                     <div class="penalty-name">
                         <i class="fa-solid fa-chart-line"></i> Modal Usaha (Jan) telat 3 bulan
@@ -695,79 +763,82 @@
             <i class="fa-solid fa-chevron-down" style="color: #8BA0BC; font-size: 12px;"></i>
         </div>
 
-        <button class="btn-pay-action" id="payNowBtn">
-            <span>Bayar Semua Tagihan</span>
+        <button class="btn-pay-action" disabled style="cursor: default; pointer-events: none;">
+            <span>Bayar</span>
             <div class="amount-group">
                 <span>Rp3.281.280</span>
                 <div class="arrow-box">
-                    <i class="fa-solid fa-chevron-right" style="font-size: 10px;"></i>
+                    <i class="fa-solid fa-play" style="font-size: 9px;"></i>
                 </div>
             </div>
         </button>
     </div>
 </div>
 
-<div id="toastMsg" class="toast-message">✅ Pembayaran berhasil</div>
+<div id="toastMsg" class="toast-message">Informasi</div>
 
 <script>
     // Toast function
     const toast = document.getElementById('toastMsg');
-    function showToast(message, isError = false) {
+    function showToast(message) {
         toast.style.opacity = '1';
         toast.innerText = message;
-        toast.style.background = isError ? '#B91C1C' : '#1E293B';
+        toast.style.background = '#1E293B';
         setTimeout(() => {
             toast.style.opacity = '0';
         }, 2500);
     }
 
-    // INTERAKSI KLIK ITEM DENDA - Menampilkan detail tanpa perhitungan per hari
+    // Toggle detail denda - AWAL TERTUTUP
+    const detailContent = document.getElementById('detailContent');
+    const toggleIcon = document.getElementById('toggleIcon');
+    const toggleText = document.getElementById('toggleText');
+    const toggleBtn = document.getElementById('toggleDetailBtn');
+    let isOpen = false;
+
+    function toggleDetail() {
+        if (isOpen) {
+            detailContent.classList.remove('open');
+            toggleIcon.classList.remove('fa-chevron-up');
+            toggleIcon.classList.add('fa-chevron-down');
+            if(toggleText) toggleText.innerText = 'Lihat detail';
+            isOpen = false;
+        } else {
+            detailContent.classList.add('open');
+            toggleIcon.classList.remove('fa-chevron-down');
+            toggleIcon.classList.add('fa-chevron-up');
+            if(toggleText) toggleText.innerText = 'Sembunyikan';
+            isOpen = true;
+        }
+    }
+
+    toggleBtn.addEventListener('click', toggleDetail);
+
+    // INTERAKSI KLIK ITEM DENDA
     const penaltyItems = document.querySelectorAll('.penalty-item-clickable');
     penaltyItems.forEach((item) => {
         item.addEventListener('click', function(e) {
             e.stopPropagation();
-            const name = this.getAttribute('data-name') || this.querySelector('.penalty-name')?.innerText?.split('?')[0];
+            const name = this.querySelector('.penalty-name')?.innerText || '';
             const amount = this.querySelector('.penalty-amount')?.innerText || '';
-            const lateText = this.getAttribute('data-late') || '';
             
             let detailMsg = '';
-            if (name.includes('Jan') && lateText.includes('3')) {
-                detailMsg = `📋 ${name}\nDenda keterlambatan: Rp${amount}\nTelat: 3 bulan (Januari 2026 belum dibayar hingga April)`;
-            } else if (name.includes('Feb')) {
-                detailMsg = `📋 ${name}\nDenda keterlambatan: Rp${amount}\nTelat: 2 bulan (Februari 2026 belum dibayar hingga April)`;
-            } else if (name.includes('Mar')) {
-                detailMsg = `📋 ${name}\nDenda keterlambatan: Rp${amount}\nTelat: 1 bulan (Maret 2026 belum dibayar hingga April)`;
+            if (name.includes('Jan') && name.includes('3 bulan')) {
+                detailMsg = `📋 ${name}\nDenda: ${amount}\nKeterlambatan: 3 bulan (Januari 2026 belum dibayar hingga April)`;
+            } else if (name.includes('Feb') && name.includes('2 bulan')) {
+                detailMsg = `📋 ${name}\nDenda: ${amount}\nKeterlambatan: 2 bulan (Februari 2026 belum dibayar hingga April)`;
+            } else if (name.includes('Mar') && name.includes('1 bulan')) {
+                detailMsg = `📋 ${name}\nDenda: ${amount}\nKeterlambatan: 1 bulan (Maret 2026 belum dibayar hingga April)`;
             } else {
-                detailMsg = `📋 ${name}\nDenda keterlambatan: Rp${amount}\nTelat: ${lateText}`;
+                detailMsg = `📋 ${name}\nDenda: ${amount}`;
             }
             showToast(detailMsg);
             
-            // Efek highlight
             item.style.background = '#FEF2F0';
             setTimeout(() => {
-                item.style.background = 'white';
+                item.style.background = '#FAFCFE';
             }, 300);
         });
-    });
-
-    // INTERAKSI BISA DIPERKECIL (Collapse/Expand)
-    const toggleDetailBtn = document.getElementById('toggleDetailBtn');
-    const detailContent = document.getElementById('detailContent');
-    const toggleIcon = document.getElementById('toggleIcon');
-    let isExpanded = true;
-
-    toggleDetailBtn.addEventListener('click', function() {
-        if (isExpanded) {
-            detailContent.classList.add('collapsed');
-            toggleIcon.classList.remove('fa-chevron-up');
-            toggleIcon.classList.add('fa-chevron-down');
-            isExpanded = false;
-        } else {
-            detailContent.classList.remove('collapsed');
-            toggleIcon.classList.remove('fa-chevron-down');
-            toggleIcon.classList.add('fa-chevron-up');
-            isExpanded = true;
-        }
     });
 
     // Info icon
@@ -779,62 +850,13 @@
         });
     }
 
-    // Tombol bayar
-    const payBtn = document.getElementById('payNowBtn');
-    payBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        payBtn.innerHTML = '<span>Memproses...</span><div class="amount-group"><i class="fa-solid fa-spinner fa-pulse"></i></div>';
-        payBtn.style.opacity = '0.8';
-        payBtn.disabled = true;
-        
-        setTimeout(() => {
-            showToast(`✅ Pembayaran berhasil! Total Rp3.281.280 (Lunas Jan + Feb + Mar)`);
-            payBtn.innerHTML = '<span>Pembayaran Berhasil ✓</span><div class="amount-group"><i class="fa-regular fa-circle-check"></i></div>';
-            payBtn.style.background = '#2C7A3E';
-            
-            // Update semua card menjadi lunas
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                card.style.opacity = '0.85';
-                card.style.background = '#F9FAFB';
-                const badge = card.querySelector('.badge-danger, .badge-warning, .badge-orange');
-                if(badge) {
-                    badge.style.background = '#E6F7E6';
-                    badge.style.color = '#2E7D32';
-                    badge.innerHTML = '<i class="fa-regular fa-check-circle"></i> Lunas';
-                }
-            });
-            
-            // Update banner
-            const banner = document.querySelector('.late-banner');
-            if(banner) {
-                banner.style.background = '#E8F5E9';
-                banner.style.borderLeftColor = '#2E7D32';
-                const bannerSpan = banner.querySelector('span');
-                if(bannerSpan) {
-                    bannerSpan.innerHTML = '✓ Semua tagihan (Januari, Februari, Maret 2026) telah lunas. Terima kasih.';
-                }
-            }
-            
-            // Update warning note
-            const warningNote = document.querySelector('.warning-note');
-            if(warningNote) {
-                warningNote.style.background = '#E8F5E9';
-                warningNote.style.color = '#2E7D32';
-                warningNote.innerHTML = '<i class="fa-regular fa-check-circle"></i> <div>Status: Semua tagihan sudah dilunasi. Tidak ada denda tambahan.</div>';
-            }
-            
-            setTimeout(() => {
-                payBtn.disabled = false;
-            }, 500);
-        }, 1500);
-    });
-
     // Back button
     const backIcon = document.querySelector('header i');
     if(backIcon) {
         backIcon.addEventListener('click', () => showToast('↩️ Kembali ke halaman utama'));
     }
+    
+    console.log('Rincian denda dalam keadaan tertutup - klik header untuk membuka');
 </script>
 
 </body>
