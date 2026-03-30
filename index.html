@@ -193,12 +193,6 @@
             color: #D93C1E;
         }
 
-        .divider-light {
-            height: 1px;
-            background: #ECF3FA;
-            margin: 16px 0;
-        }
-
         .month-total {
             background: #F8FAFE;
             padding: 12px 16px;
@@ -236,6 +230,17 @@
             font-weight: 800;
             font-size: 26px;
             letter-spacing: -0.5px;
+        }
+
+        .payment-summary {
+            background: rgba(255,255,255,0.15);
+            border-radius: 16px;
+            padding: 12px;
+            margin-top: 16px;
+        }
+
+        .payment-summary div {
+            color: white !important;
         }
 
         .warning-note {
@@ -326,11 +331,96 @@
             transition: opacity 0.2s;
         }
 
-        .payment-summary {
-            background: rgba(255,255,255,0.15);
+        .detail-denda-card {
+            background: #F1F5F9;
             border-radius: 16px;
-            padding: 12px;
-            margin-top: 16px;
+            padding: 14px;
+            margin-bottom: 16px;
+        }
+
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 4px 0;
+        }
+
+        .detail-header h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1E293B;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toggle-icon {
+            font-size: 14px;
+            color: #5B6E8C;
+            transition: transform 0.2s ease;
+        }
+
+        .detail-content {
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            max-height: 500px;
+        }
+
+        .detail-content.collapsed {
+            max-height: 0;
+        }
+
+        .penalty-item-clickable {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 8px;
+            margin: 6px 0;
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            border: 1px solid #E9EEF4;
+        }
+
+        .penalty-item-clickable:hover {
+            background: #FEF2F0;
+        }
+
+        .penalty-name {
+            font-weight: 600;
+            font-size: 13px;
+            color: #1E293B;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .penalty-amount {
+            font-weight: 700;
+            font-size: 14px;
+            color: #D93C1E;
+        }
+
+        .total-denda-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 8px;
+            margin-top: 8px;
+            background: #FEF2F0;
+            border-radius: 12px;
+            font-weight: 800;
+        }
+
+        .total-denda-label {
+            font-size: 14px;
+            color: #1E293B;
+        }
+
+        .total-denda-value {
+            font-size: 16px;
+            color: #D93C1E;
         }
 
         @keyframes fadeIn {
@@ -340,13 +430,6 @@
 
         .card {
             animation: fadeIn 0.3s ease;
-        }
-
-        .cicilan-note {
-            font-size: 11px;
-            color: #8B9AB0;
-            margin-left: 58px;
-            margin-top: 4px;
         }
     </style>
 </head>
@@ -363,16 +446,15 @@
             <i class="fa-regular fa-calendar-circle-exclamation"></i> Tagihan lewat jatuh tempo
         </p>
 
-        <!-- ==================== JANUARI 2026 (Telat 3 Bulan) ==================== -->
+        <!-- JANUARI 2026 -->
         <div class="card">
             <div class="card-header">
                 <div class="month-title">
                     <i class="fa-regular fa-calendar"></i> Januari 2026
                 </div>
-                <div class="badge-danger">Telat 3 bulan (91 hari)</div>
+                <div class="badge-danger">Telat 3 bulan</div>
             </div>
 
-            <!-- Pinjaman 1: Modal Usaha - Cicilan ke 2 -->
             <div class="item-row">
                 <img src="https://i.gojekapi.com/darkroom/nearby-cms-id/v2/images/8475b020-76a0-4dc1-96ad-531059f43b33_gopaypinjam.png" class="official-icon" alt="GopayPinjam">
                 <div class="item-details">
@@ -386,12 +468,11 @@
                     </div>
                     <div class="penalty-row">
                         <span><i class="fa-solid fa-clock"></i> Biaya keterlambatan (3 bulan)</span>
-                        <span id="janPenalty1">Rp229.251</span>
+                        <span>Rp229.251</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Pinjaman 2: Kebutuhan sehari-hari - Cicilan ke 1 -->
             <div class="item-row">
                 <img src="https://i.gojekapi.com/darkroom/nearby-cms-id/v2/images/8475b020-76a0-4dc1-96ad-531059f43b33_gopaypinjam.png" class="official-icon" alt="GopayPinjam">
                 <div class="item-details">
@@ -405,27 +486,26 @@
                     </div>
                     <div class="penalty-row">
                         <span><i class="fa-solid fa-clock"></i> Biaya keterlambatan (3 bulan)</span>
-                        <span id="janPenalty2">Rp87.819</span>
+                        <span>Rp87.819</span>
                     </div>
                 </div>
             </div>
 
             <div class="month-total">
                 <span>Total Tagihan Januari</span>
-                <span style="font-weight: 800; color: #D93C1E;" id="janTotal">Rp1.199.450</span>
+                <span style="font-weight: 800; color: #D93C1E;">Rp1.199.450</span>
             </div>
         </div>
 
-        <!-- ==================== FEBRUARI 2026 (Telat 2 Bulan) ==================== -->
+        <!-- FEBRUARI 2026 -->
         <div class="card">
             <div class="card-header">
                 <div class="month-title">
                     <i class="fa-regular fa-calendar"></i> Februari 2026
                 </div>
-                <div class="badge-warning">Telat 2 bulan (60 hari)</div>
+                <div class="badge-warning">Telat 2 bulan</div>
             </div>
 
-            <!-- Pinjaman 1: Modal Usaha - Cicilan ke 3 -->
             <div class="item-row">
                 <img src="https://i.gojekapi.com/darkroom/nearby-cms-id/v2/images/8475b020-76a0-4dc1-96ad-531059f43b33_gopaypinjam.png" class="official-icon" alt="GopayPinjam">
                 <div class="item-details">
@@ -439,12 +519,11 @@
                     </div>
                     <div class="penalty-row">
                         <span><i class="fa-solid fa-clock"></i> Biaya keterlambatan (2 bulan)</span>
-                        <span id="febPenalty1">Rp152.834</span>
+                        <span>Rp152.834</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Pinjaman 2: Kebutuhan sehari-hari - Cicilan ke 2 -->
             <div class="item-row">
                 <img src="https://i.gojekapi.com/darkroom/nearby-cms-id/v2/images/8475b020-76a0-4dc1-96ad-531059f43b33_gopaypinjam.png" class="official-icon" alt="GopayPinjam">
                 <div class="item-details">
@@ -458,27 +537,26 @@
                     </div>
                     <div class="penalty-row">
                         <span><i class="fa-solid fa-clock"></i> Biaya keterlambatan (2 bulan)</span>
-                        <span id="febPenalty2">Rp58.546</span>
+                        <span>Rp58.546</span>
                     </div>
                 </div>
             </div>
 
             <div class="month-total">
                 <span>Total Tagihan Februari</span>
-                <span style="font-weight: 800; color: #D93C1E;" id="febTotal">Rp1.093.760</span>
+                <span style="font-weight: 800; color: #D93C1E;">Rp1.093.760</span>
             </div>
         </div>
 
-        <!-- ==================== MARET 2026 (Telat 1 Bulan) ==================== -->
+        <!-- MARET 2026 -->
         <div class="card">
             <div class="card-header">
                 <div class="month-title">
                     <i class="fa-regular fa-calendar"></i> Maret 2026
                 </div>
-                <div class="badge-orange">Telat 1 bulan (30 hari)</div>
+                <div class="badge-orange">Telat 1 bulan</div>
             </div>
 
-            <!-- Pinjaman 1: Modal Usaha - Cicilan ke 4 -->
             <div class="item-row">
                 <img src="https://i.gojekapi.com/darkroom/nearby-cms-id/v2/images/8475b020-76a0-4dc1-96ad-531059f43b33_gopaypinjam.png" class="official-icon" alt="GopayPinjam">
                 <div class="item-details">
@@ -492,12 +570,11 @@
                     </div>
                     <div class="penalty-row">
                         <span><i class="fa-solid fa-clock"></i> Biaya keterlambatan (1 bulan)</span>
-                        <span id="marPenalty1">Rp76.417</span>
+                        <span>Rp76.417</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Pinjaman 2: Kebutuhan sehari-hari - Cicilan ke 3 -->
             <div class="item-row">
                 <img src="https://i.gojekapi.com/darkroom/nearby-cms-id/v2/images/8475b020-76a0-4dc1-96ad-531059f43b33_gopaypinjam.png" class="official-icon" alt="GopayPinjam">
                 <div class="item-details">
@@ -511,80 +588,99 @@
                     </div>
                     <div class="penalty-row">
                         <span><i class="fa-solid fa-clock"></i> Biaya keterlambatan (1 bulan)</span>
-                        <span id="marPenalty2">Rp29.273</span>
+                        <span>Rp29.273</span>
                     </div>
                 </div>
             </div>
 
             <div class="month-total">
                 <span>Total Tagihan Maret</span>
-                <span style="font-weight: 800; color: #D93C1E;" id="marTotal">Rp988.070</span>
+                <span style="font-weight: 800; color: #D93C1E;">Rp988.070</span>
             </div>
         </div>
 
-        <!-- GRAND TOTAL KESELURUHAN -->
+        <!-- GRAND TOTAL -->
         <div class="grand-total-card">
             <div class="grand-total-row">
                 <span class="grand-total-label">TOTAL KESELURUHAN YANG HARUS DIBAYAR</span>
             </div>
             <div class="grand-total-row" style="margin-top: 12px;">
                 <span class="grand-total-label">Pokok + Denda (Jan, Feb, Mar)</span>
-                <span class="grand-total-value" id="grandTotalAmount">Rp3.281.280</span>
+                <span class="grand-total-value">Rp3.281.280</span>
             </div>
             <div class="payment-summary">
-                <div style="display: flex; justify-content: space-between; font-size: 12px;">
+                <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px;">
                     <span>💰 Total Pokok Pinjaman</span>
-                    <span id="totalPrincipalDisplay">Rp2.647.140</span>
+                    <span>Rp2.647.140</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; font-size: 12px; margin-top: 6px;">
+                <div style="display: flex; justify-content: space-between; font-size: 12px;">
                     <span>⚠️ Total Denda Keseluruhan</span>
-                    <span id="totalPenaltyDisplay">Rp634.140</span>
+                    <span>Rp634.140</span>
                 </div>
             </div>
         </div>
 
-        <!-- Warning Denda Berlanjut -->
+        <!-- WARNING NOTE - TANPA PER HARI -->
         <div class="warning-note">
             <i class="fa-solid fa-circle-exclamation" style="font-size: 16px;"></i>
             <div>
-                <strong>Peringatan:</strong> Denda harian terus berjalan (0.1% per hari dari pokok) untuk setiap tagihan yang belum lunas. Segera lakukan pembayaran untuk menghentikan akumulasi denda tambahan.
+                <strong>Peringatan:</strong> Tagihan ini sudah melewati jatuh tempo. Denda keterlambatan dihitung per bulan sesuai ketentuan. Segera lakukan pembayaran untuk menghindari akumulasi denda lebih lanjut.
             </div>
         </div>
 
-        <!-- Rincian Denda per Cicilan -->
-        <div style="background: #F1F5F9; border-radius: 16px; padding: 14px; margin-bottom: 16px;">
-            <div style="display: flex; gap: 10px; align-items: flex-start;">
-                <i class="fa-solid fa-calculator" style="color: #2563EB; margin-top: 2px;"></i>
-                <div style="font-size: 12px; color: #334155; width: 100%;">
-                    <strong style="display: block; margin-bottom: 8px;">📋 Rincian Denda per Cicilan:</strong>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                        <span>• Modal Usaha (Jan) telat 3 bulan</span>
-                        <span style="font-weight: 600; color: #D93C1E;">Rp229.251</span>
+        <!-- Rincian Denda per Cicilan - INTERAKTIF (BISA DIPERKECIL & KLIK DETAIL) -->
+        <div class="detail-denda-card" id="detailDendaCard">
+            <div class="detail-header" id="toggleDetailBtn">
+                <h3>
+                    <i class="fa-solid fa-receipt"></i> Rincian Denda per Cicilan
+                    <i class="fa-regular fa-circle-question" style="color: #5B6E8C; font-size: 12px; cursor: help;" id="infoIcon"></i>
+                </h3>
+                <i class="fa-solid fa-chevron-up toggle-icon" id="toggleIcon"></i>
+            </div>
+            <div class="detail-content" id="detailContent">
+                <!-- Item denda dengan interaksi klik -->
+                <div class="penalty-item-clickable" data-name="Modal Usaha (Jan) telat 3 bulan" data-amount="229251" data-late="3 bulan">
+                    <div class="penalty-name">
+                        <i class="fa-solid fa-chart-line"></i> Modal Usaha (Jan) telat 3 bulan
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                        <span>• Kebutuhan Sehari-hari (Jan) telat 3 bulan</span>
-                        <span style="font-weight: 600; color: #D93C1E;">Rp87.819</span>
+                    <div class="penalty-amount">Rp229.251</div>
+                </div>
+                <div class="penalty-item-clickable" data-name="Kebutuhan Sehari-hari (Jan) telat 3 bulan" data-amount="87819" data-late="3 bulan">
+                    <div class="penalty-name">
+                        <i class="fa-solid fa-basket-shopping"></i> Kebutuhan Sehari-hari (Jan) telat 3 bulan
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                        <span>• Modal Usaha (Feb) telat 2 bulan</span>
-                        <span style="font-weight: 600; color: #D93C1E;">Rp152.834</span>
+                    <div class="penalty-amount">Rp87.819</div>
+                </div>
+                <div class="penalty-item-clickable" data-name="Modal Usaha (Feb) telat 2 bulan" data-amount="152834" data-late="2 bulan">
+                    <div class="penalty-name">
+                        <i class="fa-solid fa-chart-line"></i> Modal Usaha (Feb) telat 2 bulan
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                        <span>• Kebutuhan Sehari-hari (Feb) telat 2 bulan</span>
-                        <span style="font-weight: 600; color: #D93C1E;">Rp58.546</span>
+                    <div class="penalty-amount">Rp152.834</div>
+                </div>
+                <div class="penalty-item-clickable" data-name="Kebutuhan Sehari-hari (Feb) telat 2 bulan" data-amount="58546" data-late="2 bulan">
+                    <div class="penalty-name">
+                        <i class="fa-solid fa-basket-shopping"></i> Kebutuhan Sehari-hari (Feb) telat 2 bulan
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                        <span>• Modal Usaha (Mar) telat 1 bulan</span>
-                        <span style="font-weight: 600; color: #D93C1E;">Rp76.417</span>
+                    <div class="penalty-amount">Rp58.546</div>
+                </div>
+                <div class="penalty-item-clickable" data-name="Modal Usaha (Mar) telat 1 bulan" data-amount="76417" data-late="1 bulan">
+                    <div class="penalty-name">
+                        <i class="fa-solid fa-chart-line"></i> Modal Usaha (Mar) telat 1 bulan
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                        <span>• Kebutuhan Sehari-hari (Mar) telat 1 bulan</span>
-                        <span style="font-weight: 600; color: #D93C1E;">Rp29.273</span>
+                    <div class="penalty-amount">Rp76.417</div>
+                </div>
+                <div class="penalty-item-clickable" data-name="Kebutuhan Sehari-hari (Mar) telat 1 bulan" data-amount="29273" data-late="1 bulan">
+                    <div class="penalty-name">
+                        <i class="fa-solid fa-basket-shopping"></i> Kebutuhan Sehari-hari (Mar) telat 1 bulan
                     </div>
-                    <div style="border-top: 1px dashed #CBD5E1; margin-top: 8px; padding-top: 6px; display: flex; justify-content: space-between; font-weight: 700;">
-                        <span>Total Denda</span>
-                        <span style="color: #D93C1E;">Rp634.140</span>
+                    <div class="penalty-amount">Rp29.273</div>
+                </div>
+                
+                <div class="total-denda-row">
+                    <div class="total-denda-label">
+                        <i class="fa-solid fa-calculator"></i> Total Denda
                     </div>
+                    <div class="total-denda-value">Rp634.140</div>
                 </div>
             </div>
         </div>
@@ -602,7 +698,7 @@
         <button class="btn-pay-action" id="payNowBtn">
             <span>Bayar Semua Tagihan</span>
             <div class="amount-group">
-                <span id="bottomTotalAmount">Rp3.281.280</span>
+                <span>Rp3.281.280</span>
                 <div class="arrow-box">
                     <i class="fa-solid fa-chevron-right" style="font-size: 10px;"></i>
                 </div>
@@ -614,87 +710,85 @@
 <div id="toastMsg" class="toast-message">✅ Pembayaran berhasil</div>
 
 <script>
-    // ========================
-    // DATA RINCIAN PER CICILAN (SESUAI TOTAL YANG DIBERIKAN)
-    // Total Januari: Rp1.199.450 (Pokok Rp882.380 + Denda Rp317.070)
-    // Total Februari: Rp1.093.760 (Pokok Rp882.380 + Denda Rp211.380)
-    // Total Maret: Rp988.070 (Pokok Rp882.380 + Denda Rp105.690)
-    // Pembagian denda proporsional berdasarkan nominal pinjaman
-    // ========================
-    
-    const modalUsaha = 638061;
-    const kebutuhan = 244319;
-    const totalPokokPerBulan = modalUsaha + kebutuhan; // 882.380
-    
-    // Denda per bulan
-    const dendaJanTotal = 317070;
-    const dendaFebTotal = 211380;
-    const dendaMarTotal = 105690;
-    
-    // Hitung proporsi denda per pinjaman (berdasarkan persentase pokok)
-    const persenModal = modalUsaha / totalPokokPerBulan; // 0.723
-    const persenKebutuhan = kebutuhan / totalPokokPerBulan; // 0.277
-    
-    const janPenalty1 = Math.round(dendaJanTotal * persenModal);
-    const janPenalty2 = dendaJanTotal - janPenalty1;
-    const febPenalty1 = Math.round(dendaFebTotal * persenModal);
-    const febPenalty2 = dendaFebTotal - febPenalty1;
-    const marPenalty1 = Math.round(dendaMarTotal * persenModal);
-    const marPenalty2 = dendaMarTotal - marPenalty1;
-    
-    // Total keseluruhan
-    const totalPrincipal = totalPokokPerBulan * 3; // 2.647.140
-    const totalPenalty = dendaJanTotal + dendaFebTotal + dendaMarTotal; // 634.140
-    const grandTotal = totalPrincipal + totalPenalty; // 3.281.280
-    
-    // Update DOM denda per cicilan
-    document.getElementById('janPenalty1').innerHTML = 'Rp' + janPenalty1.toLocaleString('id-ID');
-    document.getElementById('janPenalty2').innerHTML = 'Rp' + janPenalty2.toLocaleString('id-ID');
-    document.getElementById('febPenalty1').innerHTML = 'Rp' + febPenalty1.toLocaleString('id-ID');
-    document.getElementById('febPenalty2').innerHTML = 'Rp' + febPenalty2.toLocaleString('id-ID');
-    document.getElementById('marPenalty1').innerHTML = 'Rp' + marPenalty1.toLocaleString('id-ID');
-    document.getElementById('marPenalty2').innerHTML = 'Rp' + marPenalty2.toLocaleString('id-ID');
-    
-    // Update total per bulan
-    document.getElementById('janTotal').innerHTML = 'Rp' + (totalPokokPerBulan + dendaJanTotal).toLocaleString('id-ID');
-    document.getElementById('febTotal').innerHTML = 'Rp' + (totalPokokPerBulan + dendaFebTotal).toLocaleString('id-ID');
-    document.getElementById('marTotal').innerHTML = 'Rp' + (totalPokokPerBulan + dendaMarTotal).toLocaleString('id-ID');
-    
-    document.getElementById('grandTotalAmount').innerHTML = 'Rp' + grandTotal.toLocaleString('id-ID');
-    document.getElementById('bottomTotalAmount').innerHTML = 'Rp' + grandTotal.toLocaleString('id-ID');
-    document.getElementById('totalPrincipalDisplay').innerHTML = 'Rp' + totalPrincipal.toLocaleString('id-ID');
-    document.getElementById('totalPenaltyDisplay').innerHTML = 'Rp' + totalPenalty.toLocaleString('id-ID');
-    
-    // Toast & Tombol Bayar
-    const payBtn = document.getElementById('payNowBtn');
+    // Toast function
     const toast = document.getElementById('toastMsg');
-    
     function showToast(message, isError = false) {
         toast.style.opacity = '1';
         toast.innerText = message;
-        if(isError) {
-            toast.style.background = '#B91C1C';
-        } else {
-            toast.style.background = '#1E293B';
-        }
+        toast.style.background = isError ? '#B91C1C' : '#1E293B';
         setTimeout(() => {
             toast.style.opacity = '0';
-            setTimeout(() => {
-                toast.style.background = '#1E293B';
-            }, 300);
         }, 2500);
     }
-    
+
+    // INTERAKSI KLIK ITEM DENDA - Menampilkan detail tanpa perhitungan per hari
+    const penaltyItems = document.querySelectorAll('.penalty-item-clickable');
+    penaltyItems.forEach((item) => {
+        item.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const name = this.getAttribute('data-name') || this.querySelector('.penalty-name')?.innerText?.split('?')[0];
+            const amount = this.querySelector('.penalty-amount')?.innerText || '';
+            const lateText = this.getAttribute('data-late') || '';
+            
+            let detailMsg = '';
+            if (name.includes('Jan') && lateText.includes('3')) {
+                detailMsg = `📋 ${name}\nDenda keterlambatan: Rp${amount}\nTelat: 3 bulan (Januari 2026 belum dibayar hingga April)`;
+            } else if (name.includes('Feb')) {
+                detailMsg = `📋 ${name}\nDenda keterlambatan: Rp${amount}\nTelat: 2 bulan (Februari 2026 belum dibayar hingga April)`;
+            } else if (name.includes('Mar')) {
+                detailMsg = `📋 ${name}\nDenda keterlambatan: Rp${amount}\nTelat: 1 bulan (Maret 2026 belum dibayar hingga April)`;
+            } else {
+                detailMsg = `📋 ${name}\nDenda keterlambatan: Rp${amount}\nTelat: ${lateText}`;
+            }
+            showToast(detailMsg);
+            
+            // Efek highlight
+            item.style.background = '#FEF2F0';
+            setTimeout(() => {
+                item.style.background = 'white';
+            }, 300);
+        });
+    });
+
+    // INTERAKSI BISA DIPERKECIL (Collapse/Expand)
+    const toggleDetailBtn = document.getElementById('toggleDetailBtn');
+    const detailContent = document.getElementById('detailContent');
+    const toggleIcon = document.getElementById('toggleIcon');
+    let isExpanded = true;
+
+    toggleDetailBtn.addEventListener('click', function() {
+        if (isExpanded) {
+            detailContent.classList.add('collapsed');
+            toggleIcon.classList.remove('fa-chevron-up');
+            toggleIcon.classList.add('fa-chevron-down');
+            isExpanded = false;
+        } else {
+            detailContent.classList.remove('collapsed');
+            toggleIcon.classList.remove('fa-chevron-down');
+            toggleIcon.classList.add('fa-chevron-up');
+            isExpanded = true;
+        }
+    });
+
+    // Info icon
+    const infoIcon = document.getElementById('infoIcon');
+    if(infoIcon) {
+        infoIcon.addEventListener('click', function(e) {
+            e.stopPropagation();
+            showToast('💡 Klik setiap item denda untuk melihat detail keterlambatan per bulan.');
+        });
+    }
+
+    // Tombol bayar
+    const payBtn = document.getElementById('payNowBtn');
     payBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        
-        payBtn.innerHTML = '<span>Memproses Pembayaran...</span><div class="amount-group"><i class="fa-solid fa-spinner fa-pulse"></i></div>';
+        payBtn.innerHTML = '<span>Memproses...</span><div class="amount-group"><i class="fa-solid fa-spinner fa-pulse"></i></div>';
         payBtn.style.opacity = '0.8';
         payBtn.disabled = true;
         
         setTimeout(() => {
-            showToast(`✅ Pembayaran berhasil! Total Rp${grandTotal.toLocaleString('id-ID')} (Lunas Jan + Feb + Mar)`);
-            
+            showToast(`✅ Pembayaran berhasil! Total Rp3.281.280 (Lunas Jan + Feb + Mar)`);
             payBtn.innerHTML = '<span>Pembayaran Berhasil ✓</span><div class="amount-group"><i class="fa-regular fa-circle-check"></i></div>';
             payBtn.style.background = '#2C7A3E';
             
@@ -718,7 +812,7 @@
                 banner.style.borderLeftColor = '#2E7D32';
                 const bannerSpan = banner.querySelector('span');
                 if(bannerSpan) {
-                    bannerSpan.innerHTML = '✓ Semua tagihan (Januari, Februari, Maret 2026) telah lunas. Terima kasih telah melakukan pembayaran.';
+                    bannerSpan.innerHTML = '✓ Semua tagihan (Januari, Februari, Maret 2026) telah lunas. Terima kasih.';
                 }
             }
             
@@ -735,25 +829,12 @@
             }, 500);
         }, 1500);
     });
-    
+
     // Back button
     const backIcon = document.querySelector('header i');
     if(backIcon) {
-        backIcon.addEventListener('click', () => {
-            showToast('↩️ Kembali ke halaman utama');
-        });
+        backIcon.addEventListener('click', () => showToast('↩️ Kembali ke halaman utama'));
     }
-    
-    // Console log untuk verifikasi
-    console.log('=== RINCIAN DENDA PER CICILAN ===');
-    console.log(`Januari - Modal Usaha: Rp${janPenalty1.toLocaleString()}`);
-    console.log(`Januari - Kebutuhan: Rp${janPenalty2.toLocaleString()}`);
-    console.log(`Februari - Modal Usaha: Rp${febPenalty1.toLocaleString()}`);
-    console.log(`Februari - Kebutuhan: Rp${febPenalty2.toLocaleString()}`);
-    console.log(`Maret - Modal Usaha: Rp${marPenalty1.toLocaleString()}`);
-    console.log(`Maret - Kebutuhan: Rp${marPenalty2.toLocaleString()}`);
-    console.log(`TOTAL DENDA: Rp${totalPenalty.toLocaleString()}`);
-    console.log(`GRAND TOTAL: Rp${grandTotal.toLocaleString()}`);
 </script>
 
 </body>
